@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Machine</title>
+    <title>Machine - Rebeca & Juan</title>
 
     <style>
         /* Definindo o espaço da página */
@@ -86,35 +86,37 @@
     <div class="img_fundo"> </div>
 
     <div class="conteudo">
-
+        <!-- Criação de botões que funcionam como menu, mudando o sistema numérico que será convertido-->
         <div class="botões_superiores">
-            <button class="botão_decimal ativo" onclick="mudarSistema('decimal')">Decimal</button>
-            <button class="botão_binário" onclick="mudarSistema('binario')">Binário</button>
-            <button class="botão_octal" onclick="mudarSistema('octal')">Octal</button>
-            <button class="botão_hex" onclick="mudarSistema('hexadecimal')">Hexadecimal</button>
+            <button class="botão_decimal ativo" id="btn_decimal" onclick="mudarSistema('decimal')">Decimal</button>
+            <button class="botão_binário" id="btn_binario" onclick="mudarSistema('binario')">Binário</button>
+            <button class="botão_octal" id="btn_octal" onclick="mudarSistema('octal')">Octal</button>
+            <button class="botão_hex" id="btn_hexadecimal" onclick="mudarSistema('hexadecimal')">Hexadecimal</button>
         </div>
 
         <h1>Machine - Rebeca & Juan</h1>
 
         <h3>Digite um número <span id="span_titulo">decimal</span>:</h3>
-        <input id="demo1" type="text" placeholder="Ex: 42">
+        <input id="input_numero" type="text" placeholder="Ex: 42">
         <br><br>
 
         <button onclick="converter()">Converter</button>
 
+
         <h3>Resultados:</h3>
         <p>Decimal:
-        <div id="demo2"><span id="resultado_decimal"></span></div>
+            <span id="resultado_decimal"></span>
         </p>
         <p>Octal:
-        <div id="demo3"><span id="resultado_octal"></span></div>
+            <span id="resultado_octal"></span>
         </p>
         <p>Hexadecimal:
-        <div id="demo4"><span id="resultado_hexadecimal"></div>
+            <span id="resultado_hexadecimal">
         </p>
         <p>Binário:
-        <div id="demo5"><span id="resultado_binario"></div>
+            <span id="resultado_binario">
         </p>
+
     </div>
 
     <script>
@@ -125,6 +127,7 @@
             sistemaAtual = sistema;
             let titulo = document.getElementById("span_titulo");
 
+            // incrementa o título com o sistema numérico que será usado.
             if (sistema === 'decimal') {
                 titulo.innerHTML = `decimal`;
 
@@ -139,20 +142,60 @@
 
             }
 
+            // retira a classe ativa dos botões
             document.getElementById("btn_decimal").classList.remove("ativo");
             document.getElementById("btn_binario").classList.remove("ativo");
             document.getElementById("btn_octal").classList.remove("ativo");
-            document.getElementById("btn_hex").classList.remove("ativo");
+            document.getElementById("btn_hexadecimal").classList.remove("ativo");
+
+            document.getElementById("btn_" + sistema).classList.add("ativo");
+
+            // chama função para limpar dados de resultados
+            limparResultados();
 
         }
 
         function converter() {
-            let decimal = Number(demo1.value);
+            let valor = document.getElementById("input_numero").value.trim();
+            let base = 10;
 
-            demo2.innerHTML = decimal.toString(8);
-            demo3.innerHTML = decimal.toString(16);
-            demo4.innerHTML = decimal.toString(2);
+            //altera a base de acordo com o sistema selecionado
+            if (sistemaAtual === "binario") {
+                base = 2;
+            }
+            if (sistemaAtual === "octal") {
+                base = 8;
+            }
+            if (sistemaAtual === "hexadecimal") {
+                base = 16;
+
+            }
+
+            let decimal = parseInt(valor, base);
+
+            // caso o valor aplicado não seja de acordo com o sistema numérico, emite um aviso.
+            if (valor === "" || decimal.toString(base) !== valor.toLowerCase()) {
+                alert("Número inválido para " + SistemaAtual);
+                return;
+
+            }
+
+            document.getElementById("resultado_decimal").innerText = decimal;
+            document.getElementById("resultado_octal").innerText = decimal.toString(8);
+            document.getElementById("resultado_hexadecimal").innerText = decimal.toString(16).toUpperCase();
+            document.getElementById("resultado_binario").innerText = decimal.toString(2);
+
         }
+
+        // função para limpar resultados após serem chamados os botões;
+        function limparResultados() {
+            document.getElementById("resultado_decimal").innerText = "";
+            document.getElementById("resultado_octal").innerText = "";
+            document.getElementById("resultado_hexadecimal").innerText = "";
+            document.getElementById("resultado_binario").innerText = "";
+        }
+
+
     </script>
 </body>
 
