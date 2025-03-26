@@ -1,5 +1,6 @@
 <!-- Criado por Marise Miranda | 2017.1 -->
 <!-- Adaptado por Matheus Matos | 2025.1 -->
+<!-- Adaptada por Juan Vieira e Rebeca Oliveira | 2025.1 -->
 
 <!DOCTYPE html>
 <html lang="pt">
@@ -10,12 +11,12 @@
     <title>Machine</title>
 
     <style>
-        
         /* Definindo o espaço da página */
-       body, html {
-        height: 100%; 
-        margin: 0;
-        padding: 0;
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
         }
 
         * {
@@ -26,7 +27,7 @@
         .img_fundo {
             background-image: url("https://img.freepik.com/fotos-gratis/quadro-negro-inscrito-com-formulas-e-calculos-cientificos_1150-19413.jpg");
             filter: blur(8px);
-            -webkit-filter: blur(6px); 
+            -webkit-filter: blur(6px);
             height: 100%;
             background-position: center;
             background-repeat: no-repeat;
@@ -34,12 +35,12 @@
         }
 
         /* Conteúdos da página */
-        .conteúdo {
-            background-color: rgb(0,0,0); 
-            background-color: rgba(0,0,0, 0.4);
+        .conteudo {
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
             color: white;
             font-weight: bold;
-            border: 3px solid ;
+            border: 3px solid;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -59,59 +60,94 @@
         }
 
         /* Estilizando os botões de conversão */
-        .botão_decimal, .botão_binário, .botão_octal, .botão_hex {
-            background-color:rgb(230, 230, 224);
+        .botão_decimal,
+        .botão_binário,
+        .botão_octal,
+        .botão_hex {
+            background-color: rgb(230, 230, 224);
             border-radius: 5px;
-            padding: 6px 10px; 
-            border: none; 
-            color: black; 
-            cursor: pointer; 
+            padding: 6px 10px;
+            border: none;
+            color: black;
+            cursor: pointer;
             font-weight: bold;
-            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
 
-
+        .ativo {
+            background-color: rgb(0, 0, 0);
+            color: rgb(230, 230, 224);
+        }
     </style>
 </head>
 
 <body>
-    
+
     <div class="img_fundo"> </div>
 
-        <div class="conteúdo">
+    <div class="conteudo">
 
-            <div class="botões_superiores">
-                <button class="botão_decimal">Decimal</button>
-                <button class="botão_binário">Binário</button>
-                <button class="botão_octal">Octal</button>
-                <button class="botão_hex">Hexadecimal</button>
-            </div>
-            
-            <h1>Machine - Rebeca & Juan</h1>
-
-            <h3>Digite um número decimal:</h3>
-            <input id="demo1" type="text" placeholder="Ex: 42">
-            <br><br>
-
-            <button onclick="converter()">Converter</button>
-
-            <h3>Resultados:</h3>
-            <p>Octal:
-            <div id="demo2"></div>
-            </p>
-            <p>Hexadecimal:
-            <div id="demo3"></div>
-            </p>
-            <p>Binário:
-            <div id="demo4"></div>
-            </p>
+        <div class="botões_superiores">
+            <button class="botão_decimal ativo" onclick="mudarSistema('decimal')">Decimal</button>
+            <button class="botão_binário" onclick="mudarSistema('binario')">Binário</button>
+            <button class="botão_octal" onclick="mudarSistema('octal')">Octal</button>
+            <button class="botão_hex" onclick="mudarSistema('hexadecimal')">Hexadecimal</button>
         </div>
-    
-        
+
+        <h1>Machine - Rebeca & Juan</h1>
+
+        <h3>Digite um número <span id="span_titulo">decimal</span>:</h3>
+        <input id="demo1" type="text" placeholder="Ex: 42">
+        <br><br>
+
+        <button onclick="converter()">Converter</button>
+
+        <h3>Resultados:</h3>
+        <p>Decimal:
+        <div id="demo2"><span id="resultado_decimal"></span></div>
+        </p>
+        <p>Octal:
+        <div id="demo3"><span id="resultado_octal"></span></div>
+        </p>
+        <p>Hexadecimal:
+        <div id="demo4"><span id="resultado_hexadecimal"></div>
+        </p>
+        <p>Binário:
+        <div id="demo5"><span id="resultado_binario"></div>
+        </p>
+    </div>
 
     <script>
+
+        let sistemaAtual = "decimal";
+
+        function mudarSistema(sistema) {
+            sistemaAtual = sistema;
+            let titulo = document.getElementById("span_titulo");
+
+            if (sistema === 'decimal') {
+                titulo.innerHTML = `decimal`;
+
+            } else if (sistema === 'binario') {
+                titulo.innerHTML = `binário`;
+
+            } else if (sistema === 'octal') {
+                titulo.innerHTML = `octal`;
+
+            } else if (sistema === 'hexadecimal') {
+                titulo.innerHTML = `hexadecimal`;
+
+            }
+
+            document.getElementById("btn_decimal").classList.remove("ativo");
+            document.getElementById("btn_binario").classList.remove("ativo");
+            document.getElementById("btn_octal").classList.remove("ativo");
+            document.getElementById("btn_hex").classList.remove("ativo");
+
+        }
+
         function converter() {
-            var decimal = Number(demo1.value);
+            let decimal = Number(demo1.value);
 
             demo2.innerHTML = decimal.toString(8);
             demo3.innerHTML = decimal.toString(16);
