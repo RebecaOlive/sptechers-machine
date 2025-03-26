@@ -7,30 +7,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPTecher's Machine</title>
+    <title>Machine</title>
+
+    <style>
+        
+        /* Definindo o espaço da página */
+       body, html {
+        height: 100%; 
+        margin: 0;
+        padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Imagem de fundo da página desfocada */
+        .img_fundo {
+            background-image: url("https://img.freepik.com/fotos-gratis/quadro-negro-inscrito-com-formulas-e-calculos-cientificos_1150-19413.jpg");
+            filter: blur(8px);
+            -webkit-filter: blur(6px); 
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Conteúdos da página */
+        .conteúdo {
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0, 0.4);
+            color: white;
+            font-weight: bold;
+            border: 3px solid ;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 80%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Posicionando os botões de conversão no canto superior direito */
+        .botões_superiores {
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            padding: 10px;
+        }
+
+        /* Estilizando os botões de conversão */
+        .botão_decimal, .botão_binário, .botão_octal, .botão_hex {
+            background-color:rgb(230, 230, 224);
+            border-radius: 5px;
+            padding: 6px 10px; 
+            border: none; 
+            color: black; 
+            cursor: pointer; 
+            font-weight: bold;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+
+    </style>
 </head>
 
-<body bgcolor="#00ffff">
-    <center>
-        <h1>SPTecher's Machine</h1>
+<body>
+    
+    <div class="img_fundo"> </div>
 
-        <h3>Digite um número decimal:</h3>
-        <input id="demo1" type="text" placeholder="Ex: 42">
-        <br><br>
+        <div class="conteúdo">
 
-        <button onclick="converter()">Converter</button>
+            <div class="botões_superiores">
+                <button class="botão_decimal">Decimal</button>
+                <button class="botão_binário">Binário</button>
+                <button class="botão_octal">Octal</button>
+                <button class="botão_hex">Hexadecimal</button>
+            </div>
+            
+            <h1>Machine - Rebeca & Juan</h1>
 
-        <h3>Resultados:</h3>
-        <p>Octal:
-        <div id="demo2"></div>
-        </p>
-        <p>Hexadecimal:
-        <div id="demo3"></div>
-        </p>
-        <p>Binário:
-        <div id="demo4"></div>
-        </p>
-    </center>
+            <h3>Digite um número decimal:</h3>
+            <input id="demo1" type="text" placeholder="Ex: 42">
+            <br><br>
+
+            <button onclick="converter()">Converter</button>
+
+            <h3>Resultados:</h3>
+            <p>Octal:
+            <div id="demo2"></div>
+            </p>
+            <p>Hexadecimal:
+            <div id="demo3"></div>
+            </p>
+            <p>Binário:
+            <div id="demo4"></div>
+            </p>
+        </div>
+    
+        
 
     <script>
         function converter() {
