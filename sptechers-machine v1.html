@@ -11,6 +11,7 @@
     <title>Machine - Rebeca & Juan</title>
 
     <style>
+
         /* Definindo o espaço da página */
         body,
         html {
@@ -19,6 +20,7 @@
             padding: 0;
         }
 
+        /* Definindo que a largura e altura dos elementos incluam o padding e a border, evitando que aumentem o tamanho total. */
         * {
             box-sizing: border-box;
         }
@@ -34,20 +36,22 @@
             background-size: cover;
         }
 
-        /* Conteúdos da página */
+        /* Estilizando conteúdos da página */
         .conteudo {
             background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.6);
             color: white;
             font-weight: bold;
             border: 3px solid;
             position: absolute;
-            top: 50%;
+            top: 55%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 2;
             width: 80%;
-            padding: 20px;
+            height: 80%;
+            padding: 10px;
+            padding-bottom: 20%;
             text-align: center;
         }
 
@@ -74,16 +78,108 @@
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
 
+        /* Estilizando título da machine (" Machine by Rebeca e Juan ") */
+        .título_machine {
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0, 0.6);
+            color: white;
+            font-weight: bold;
+            font-size: 250%;
+            border: 1px solid ;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%);
+            z-index: 2;
+            width: 35%;
+            padding: 5px;
+            margin-top: 1%;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        /* Estilizando título dos resultados das conversões (" Resultados: ") */
+        .título_resultados {
+            display: flex;
+            justify-content: center;
+            font-family: monospace;
+            font-size: 140%;
+        }
+
+        /* Estilizando div que contêm os os cards de resultado das conversões */
+        .resultados {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        /* Estilizando cards com os resultados das conversões */
+        .card_decimal,
+        .card_octal,
+        .card_hexa,
+        .card_binário {
+            background-color: rgb(230, 230, 224);
+            color: black;
+            padding: 4%;
+            border-radius: 15%;
+            width: 20%;
+            font-family: monospace;
+            font-size: 120%;
+        }
+
+        /* Estilizando os resultados das conversões */
+        .result_card_decimal,
+        .result_card_octal,
+        .result_card_hexa,
+        .result_card_binário {
+            display: flex;
+            justify-content: center;
+            margin-top: 30%;
+        }
+
+        /* Estilizando nome da conversão específica (" Decimal: ") */
+        .b_decimal,
+        .b_octal,
+        .b_hexa,
+        .b_binário {
+            font-size: 120%;
+        }
+
+        /* Estilizando a input que recebe o valor para conversão */
+        .campo_número {
+            background-color: rgb(230, 230, 224);
+            width: 20%;
+            height: 20%;
+        }
+
+        /* Estilizando o botão que aciona os cálculos da conversão */
+        .botão_conversão {
+            background-color: rgb(230, 230, 224);
+            padding: 1%;
+            font-weight: bold;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Estilizando o texto "Digite um número" */
+        .digite_número_txt{
+            font-size: 130%;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        /* Estilizando o botão de escolha de base para converesão */
         .ativo {
-            background-color: rgb(0, 0, 0);
+            background-color: rgb(126, 122, 122);
             color: rgb(230, 230, 224);
         }
+
     </style>
 </head>
 
 <body>
 
     <div class="img_fundo"> </div>
+
+    <h1 class="título_machine">Machine by Rebeca & Juan</h1>
 
     <div class="conteudo">
         <!-- Criação de botões que funcionam como menu, mudando o sistema numérico que será convertido-->
@@ -94,28 +190,29 @@
             <button class="botão_hex" id="btn_hexadecimal" onclick="mudarSistema('hexadecimal')">Hexadecimal</button>
         </div>
 
-        <h1>Machine - Rebeca & Juan</h1>
 
-        <h3>Digite um número <span id="span_titulo">decimal</span>:</h3>
-        <input id="input_numero" type="text" placeholder="Ex: 42">
+        <h3 class="digite_número_txt">Digite um número <span id="span_titulo">decimal</span>:</h3>
+        <input class="campo_número" id="input_numero" type="text" placeholder="Ex: 42">
         <br><br>
 
-        <button onclick="converter()">Converter</button>
+        <button class="botão_conversão" onclick="converter()">Converter</button>
 
 
-        <h3>Resultados:</h3>
-        <p>Decimal:
-            <span id="resultado_decimal"></span>
-        </p>
-        <p>Octal:
-            <span id="resultado_octal"></span>
-        </p>
-        <p>Hexadecimal:
-            <span id="resultado_hexadecimal">
-        </p>
-        <p>Binário:
-            <span id="resultado_binario">
-        </p>
+        <h3 class="título_resultados">Resultados:</h3>
+        <div class="resultados">
+            <p class="card_decimal"><b class="b_decimal">Decimal:</b>
+                <span class="result_card_decimal" id="resultado_decimal"></span>
+            </p>
+            <p class="card_octal"> <b class="b_octal">Octal:</b>
+                <span class="result_card_octal" id="resultado_octal"></span>
+            </p>
+            <p class="card_hexa"><b class="b_hexa">Hexadecimal:</b>
+                <span class="result_card_hexa" id="resultado_hexadecimal">
+            </p>
+            <p class="card_binário"><b class="b_binário">Binário:</b>
+                <span class="result_card_binário" id="resultado_binario">
+            </p>
+        </div>
 
     </div>
 
@@ -175,7 +272,7 @@
 
             // caso o valor aplicado não seja de acordo com o sistema numérico, emite um aviso.
             if (valor === "" || decimal.toString(base) !== valor.toLowerCase()) {
-                alert("Número inválido para " + SistemaAtual);
+                alert("Número inválido para " + sistemaAtual);
                 return;
 
             }
@@ -184,6 +281,8 @@
             document.getElementById("resultado_octal").innerText = decimal.toString(8);
             document.getElementById("resultado_hexadecimal").innerText = decimal.toString(16).toUpperCase();
             document.getElementById("resultado_binario").innerText = decimal.toString(2);
+
+            input_numero.focus()
 
         }
 
